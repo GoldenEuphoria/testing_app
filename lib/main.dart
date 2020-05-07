@@ -99,13 +99,14 @@ class _MessageHandlerState extends State<MessageHandler>{
   void sendNotifAFirestore() {
 
     String uid = 'jeffd23';
+    String gid = 'dnjqsk';
     //FirebaseUser user = await _auth.currentUser();
     String notif = 'Bonjour Team, malheureusement il y a un accident à cause du circulation dans la rue N23, une rue à éviter ' ;
 
     // Create a new Notif document and add it to the collection
     var discussion = _db
-        .collection('users')
-        .document(uid)
+        .collection('groups')
+        .document(gid)
         .collection('discussion')
         .document(notif);
 
