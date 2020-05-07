@@ -45,7 +45,7 @@ class _MessageHandlerState extends State<MessageHandler>{
           content: Text(message['notification']['title']),
           action: SnackBarAction( //optional action when the user clicks on the notif
             label: 'GO',
-            onPressed: () => null,
+            onPressed: () => Container(),
           ),
 
         );
@@ -66,10 +66,11 @@ class _MessageHandlerState extends State<MessageHandler>{
 
   @override
   Widget build( BuildContext context){
-    return null;
+    return Container();
 }
 
   /// Get the token, save it to the database for current user
+
   _saveDeviceToken() async {
     // Get the current user
     String uid = 'jeffd23';
@@ -92,7 +93,33 @@ class _MessageHandlerState extends State<MessageHandler>{
         'platform': Platform.operatingSystem // optional
       });
     }
+
   }
+
+  void sendNotifAFirestore() {
+
+    String uid = 'jeffd23';
+    //FirebaseUser user = await _auth.currentUser();
+    String notif = 'Bonjour Team, malheureusement il y a un accident à cause du circulation dans la rue N23, une rue à éviter ' ;
+
+    // Create a new Notif document and add it to the collection
+    var discussion = _db
+        .collection('users')
+        .document(uid)
+        .collection('discussion')
+        .document(notif);
+
+    discussion.setData({
+      'notification': notif,
+      'createdAt': FieldValue.serverTimestamp(),
+      'senderID': uid
+    });
+
+
+  }
+
+
+
 
 
 
